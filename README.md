@@ -1,4 +1,4 @@
-
+![Sparkle Sphere Header](https://i.pinimg.com/564x/4f/1f/85/4f1f8588100c09ee126be1e66483ade8.jpg)
 # Tugas 2
 ### Nama: Rumintang Jessica H <br>
 ### Kelas: PBP A <br> 
@@ -183,7 +183,7 @@ Untuk dapat melakukan routing pada proyek agar dapat menjalankan aplikasi ```mai
 Sebelum melakukan _deployment_, kita perlu menghubungkan repositori di GitHub dengan direktori lokal kita yaitu ```sparkle_sphere```. Setelah itu, kita melakukan ```add```, ```commit```, dan ```push``` kode yang ada di direktori lokal ke dalam repositori kita. Setelah di-push, kita harus menyambungkan akun Adaptable dengan GitHub. Jika sudah tersambung, maka kita bisa langsung membuat ```New App``` di App Dashboard. Di situ, akan ada pilihan untuk mengkoneksikan dengan repositori GitHub. Kita akan mengkoneksikan dengan repositori yang telah dibuat sebelumnya yakni ```Sparkle-Sphere```. Jika sudah, maka kita pilih template ```Python App Template```. Untuk tipe database, pilih ```PostgreSQL```. Setelahnya, saya memilih versi Python 3.10. Lalu, pada bagian ```Start Command``` saya memasukkan perintah ```python manage.py migrate && gunicorn sparkle_sphere.wsgi```. Masukkan nama aplikasi lalu centang ```HTTP Listener on PORT```. Jika sudah, klik ```Deploy App``` dan tunggu sampai selesai. Jika sudah terlihat tanda centang di seluruh proses, maka proses deployment aplikasi selesai.<br><br>
 
 ## 2. Buatlah bagan yang berisi _request client_ ke web aplikasi berbasis Django beserta responnya dan jelaskan pada bagan tersebut kaitan antara ```urls.py```, ```views.py```, ```models.py```, dan berkas ```html```.
-
+![Stucture MVT](https://i.pinimg.com/564x/07/e3/e6/07e3e6b34198ef0c1bd22075009646de.jpg)
 
 ## 3. Jelaskan mengapa kita menggunakan _virtual environment_? Apakah kita tetap dapat membuat aplikasi web berbasis Django tanpa menggunakan _virtual environment_?
 Kita menggunakan _virtual environment_ dalam pengembangan aplikasi web, termasuk yang sedang dipelajari sekarang yaitu aplikasi berbasis Django. _Virtual environment_ membantu kita dalam menjaga dan mengolola proyek yang kita sedang kembangkan dengan lebih baik. _Virtual environment_ membantu kita menghindari masalah seperti konflik antar-paket dan memudahkan instalasi dan pemeliharaan paket yang diperlukan.<br><br> 
@@ -217,5 +217,4 @@ Ya, kita tetap dapat membuat aplikasi web berbasis Django tanpa menggunakan _vir
 | Perantara        | Controller sebagai perantara antara Model dan View | Presenter sebagai perantara antara Model dan View   |
 | Cocok untuk       | Mendukung pengembangan aplikasi dengan tim yang besar | Lebih sesuai untuk aplikasi dengan kompleksitas yang rendah dan tim yang kecil |
 | Keunggulan       | Cocok digunakan untuk aplikasi yang memiliki banyak kontrol inputan pengguna | Cocok digunakan untuk aplikasi yang menekankan interaksi dengan pengguna dan menampilkan data dalam bentuk kontrol tampilan |
-
 
