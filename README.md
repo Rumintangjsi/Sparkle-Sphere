@@ -19,11 +19,11 @@ Djanggo sendiri merupakan suatu framework yang cukup umum dalam pengembangan web
         ```
         source env/bin/activate
         ```
-    _Virtual environment_ yang aktif akan ditandai dengan ```(env)``` pada baris _input terminal_. <br> <br>
+    _Virtual environment_ yang aktif akan ditandai dengan `(env)` pada baris _input terminal_. <br> <br>
 
 ### Menyiapkan _Dependencies_ dan Membuat Proyek Django    
 Selanjutnya saya menyiapkan _depedencies_ dan membuat proyek django. _Dependencies_ adalah bagian penting dalam perangkat lunak yang memastikan komponen bekerja bersama. Mereka bisa berupa _library_, _framework_, atau _package_ yang dibutuhkan. Dependencies mempercepat pengembangan, tetapi perlu manajemen versi yang hati-hati. Lingkungan virtual membantu mengisolasi dependencies antar proyek. <br>
-* Di dalam direktori ```sparkle_sphere``` saya membuat berkas yang bernama ```requirements.txt``` dan menambahkan beberapa _dependencies_. <br>
+* Di dalam direktori `sparkle_sphere` saya membuat berkas yang bernama `requirements.txt` dan menambahkan beberapa _dependencies_. <br>
     ```python
     django
     gunicorn
@@ -36,16 +36,16 @@ Selanjutnya saya menyiapkan _depedencies_ dan membuat proyek django. _Dependenci
     ```
     pip install -r requirements.txt
     ```
-* Kemudian saya membuat proyek Django yang bernama ```sparkle_sphere``` dengan perintah sebagai berikut.<br>
+* Kemudian saya membuat proyek Django yang bernama `sparkle_sphere` dengan perintah sebagai berikut.<br>
 
     ```
     django-admin startproject shopping_list .
     ```
-    Kita harus memastikan bahwa karakter ```.``` tertulis di akhir perintah. <br><br>
+    Kita harus memastikan bahwa karakter `.` tertulis di akhir perintah. <br><br>
 
 ### Konfigurasi Proyek dan Menjalankan _Server_
 Sekarang, kita sampai pada tahan konfigurasi proyek dan menjalankan server.
-* Pada file ```settings.py``` kita perlu menambahkan ```*``` pada ```ALLOWED_HOSTS``` untuk keperluan _deployment_:
+* Pada file `settings.py` kita perlu menambahkan `*` pada `ALLOWED_HOSTS` untuk keperluan _deployment_:
     ```
     ...
     ALLOWED_HOSTS = ["*"]
@@ -53,14 +53,14 @@ Sekarang, kita sampai pada tahan konfigurasi proyek dan menjalankan server.
     ```
 * Dalam konteks deployment, ALLOWED_HOSTS adalah daftar host yang diizinkan untuk mengakses aplikasi web. Jika saya mengatur nilai ALLOWED_HOSTS menjadi ["*"], ini akan memberikan izin akses kepada semua host, yang berarti aplikasi dapat diakses secara luas. Namun, kita harus berhati-hati saat menggunakan pengaturan ini, dan sebaiknya hanya digunakan dalam situasi tertentu, seperti saat melakukan uji coba atau tahap awal pengembangan. <br>
     
-* Sebelum menjalankan perintah untuk mengetes server sudah berjalan atau belum, kita harus memastikan bahwa berkas ```manage.py``` ada pada direktori yang aktif pada _shell_ saat ini.<br>
+* Sebelum menjalankan perintah untuk mengetes server sudah berjalan atau belum, kita harus memastikan bahwa berkas `manage.py` ada pada direktori yang aktif pada _shell_ saat ini.<br>
     ```
     ./manage.py runserver
     ```
     Kita bisa membuka http://localhost:8000 pada peramban web untuk dapat melihat animasi roket yang menandakan aplikasi Django berhasil dibuat. <br>
 
 ### Menghentikan _Server_ dan Menonaktifkan _Virtual Environment_
-* Untuk menghentikan _server_, saya menekan ```Control+C``` pada _shell_ sebagai pengguna Mac.
+* Untuk menghentikan _server_, saya menekan `Control+C` pada _shell_ sebagai pengguna Mac.
     Untuk menonaktifkan _virtual environment_ dengan menjalankan perintah: <br>
 
     ```
@@ -69,13 +69,13 @@ Sekarang, kita sampai pada tahan konfigurasi proyek dan menjalankan server.
 **Dengan demikian aplikasi Django telah dibuat!**
 
 ### Unggah Proyek ke Repositori GitHub
-* Saya membuat repositori GitHub yang bernama ```Sparkle-Sphere``` dengan visibilitas _public_.<br>
-* Selanjutnya saya menginisiasi direktori ```sparkle_sphere``` sebagai repositori Git yang terdapat pada tutorial sebelumnya.
-* Setelah itu saya menambahkan berkas ```.gitignore``` <br>
-    * Berkas ```.gitignore``` adalah konfigurasi di Git yang menginstruksikan Git untuk mengabaikan berkas dan direktori tertentu, seperti berkas hasil kompilasi, berkas sementara, atau konfigurasi pribadi. Ini untuk memastikan Git tidak melacak berkas-berkas tersebut dalam versi kontrol.
-* Kemudian saya melakukan ```add```, ```commit```, dan ```pnush``` dari direktori repositori lokal.<br>
+* Saya membuat repositori GitHub yang bernama `Sparkle-Sphere` dengan visibilitas _public_.<br>
+* Selanjutnya saya menginisiasi direktori `sparkle_sphere` sebagai repositori Git yang terdapat pada tutorial sebelumnya.
+* Setelah itu saya menambahkan berkas `.gitignore`. <br>
+    * Berkas `.gitignore` adalah konfigurasi di Git yang menginstruksikan Git untuk mengabaikan berkas dan direktori tertentu, seperti berkas hasil kompilasi, berkas sementara, atau konfigurasi pribadi. Ini untuk memastikan Git tidak melacak berkas-berkas tersebut dalam versi kontrol.
+* Kemudian saya melakukan `add`, `commit`, dan `pnush` dari direktori repositori lokal.<br>
 
-### Membuat Aplikasi ```main``` dalam Proyek Sparkle Sphere
+### Membuat Aplikasi `main` dalam Proyek Sparkle Sphere
 Pada langkah ini saya membuat aplikasi baru bernama main dalam proyek yang telah saya buat sebelumnya yang bernama Sparkle Sphere.<br>
 * Sebelum kita membuat aplikasi main, kita perlu mengaktifkan _virtual environment_ dengan menjalankan perintah seperti diatas.<br>
 * Selanjutnya kita menjalankan perintah berikut untuk membuat aplikasi baru.<br>
@@ -218,3 +218,243 @@ Ya, kita tetap dapat membuat aplikasi web berbasis Django tanpa menggunakan _vir
 | Cocok untuk       | Mendukung pengembangan aplikasi dengan tim yang besar | Lebih sesuai untuk aplikasi dengan kompleksitas yang rendah dan tim yang kecil |
 | Keunggulan       | Cocok digunakan untuk aplikasi yang memiliki banyak kontrol inputan pengguna | Cocok digunakan untuk aplikasi yang menekankan interaksi dengan pengguna dan menampilkan data dalam bentuk kontrol tampilan |
 
+## 5. Apa perbedaan antara form `POST` dan form `GET` dalam Django?
+|                           | Metode POST (HTTP POST)  | Metode GET (HTTP GET)   |
+|---------------------------|---------------------------|--------------------------|
+| **Keamanan**              | Lebih aman                | Kurang aman              |
+| **Ketentuan Data**        | Data tidak ditampilkan di URL, disimpan di dalam badan permintaan HTTP | Data ditambahkan ke URL, terlihat oleh semua orang |
+| **Ketentuan Panjang URL** | Tidak terbatas panjang URL | Batasan panjang URL lebih ketat |
+| **Kegunaan**              | Biasanya digunakan untuk input data melalui form | Biasanya digunakan untuk input data melalui link |
+
+
+## 6. Apa perbedaan utama antara XML, JSON, dan HTML dalam konteks pengiriman data?
+|               | XML (eXtensible Markup Language) | JSON (JavaScript Object Notation) | HTML (Hypertext Markup Language) |
+|---------------|----------------------------------|-----------------------------------|--------------------------------|
+| **Struktur**  | Terspesifikasi                   | Ringkas                           | Spesifik                       |
+| **Pemrosesan**| Dapat diurai dan diproses        | Dapat diurai dan diproses         | Tidak dapat diurai              |
+| **Human-Readable** | Ya                         | Ya                                | Ya                             |
+| **Lintas Bahasa Pemrograman** | Ya           | Ya                                | Tidak                          |
+| **Tujuan Utama** | Pertukaran data antar aplikasi | Pertukaran data antar aplikasi    | Tampilan halaman web           |
+
+**Penjelasan singkat:**  XML digunakan untuk pertukaran data yang sangat terstruktur, JSON digunakan untuk pertukaran data yang lebih ringkas dan mudah dimengerti, sementara HTML digunakan untuk membuat tampilan halaman web dan bukan untuk pemrosesan data. Pemilihan format tergantung pada kebutuhan dan konteks penggunaannya. <br>
+
+## 7. Mengapa JSON sering digunakan dalam pertukaran data antara aplikasi web modern?
+JSON (JavaScript Object Notation) sangat populer dalam komunikasi antara aplikasi web modern karena kemudahan penggunaannya, efisiensi, dan fleksibilitas. JSON menggunakan format yang sederhana, seperti objek dan array, sehingga data dapat dipahami dengan cepat. Keuntungannya tidak berhenti di situ; JSON juga bisa digunakan dalam berbagai bahasa pemrograman, sehingga berbagai aplikasi dapat berbicara satu sama lain tanpa masalah. JSON juga mudah diurai oleh komputer, bahkan dengan perpustakaan yang berbeda-beda.
+
+Selain itu, JSON efisien dalam pengiriman data melalui jaringan. Data yang dikirim dalam format JSON ringan, sehingga mengurangi waktu dan sumber daya yang dibutuhkan untuk mentransfernya. Di samping itu, JSON memiliki fleksibilitas yang sangat berguna; Kita bisa menggunakan format ini untuk merepresentasikan berbagai jenis data dengan mudah. Selain itu, JSON dianggap aman untuk digunakan dalam pertukaran data web. Berbeda dengan beberapa format lain yang bisa menghadapi risiko keamanan, JSON cenderung lebih aman. Itulah mengapa banyak aplikasi web modern memilih JSON sebagai cara utama untuk berkomunikasi.
+
+## 8. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
+Sebelum kita masuk ke checklist yang pertama yaitu membuat input form kita perlu menngubah routing `main/` menjadi `/`. Pertama-tama kita perlu mengaktifkan _virtual environment_ seperti tutorial yang bisa dilihat diatas. Selanjutna kita perlu mengganti path yang terdapat pada `urls.py` yang ada pada folder `sparkle_spehere` yaitu mengubah `main/` menjadi `''` pada `urlpatterns`. Kita dapat menjalankan runserver dan melihatnya pada http://localhost:8000/. <br>
+
+### Implementasi Skeleton sebagai Kerangka _Views_
+Sebelum kita membuat form untuk menambahkan objek model pada app yang telah dibuat sebelumnya yaitu Sparkle Sphere. Kita perlu membuat suatu _skeleton_ agar terdapat konsistemsi dalam desain situs web kita dan juga berfungsi sebagai kerangka view dari web yang kita buat. 
+* Kita harus membuat folder `templates` pada main folder yaitu `sparkle_sphere` kemudian kita perlu membuat berkas HTML yang bernama `base.html` yang akan berfungsi sebagai template dasar untuk halaman web lainnya dalam proyek ini. <br>
+* Kemudian, buka `settings.py` yang terdapat pada subdirektori `sparkle_sphere` kemudian kita perlu menambahkan baris berikut pada `TEMPLATES`.<br><br>
+    ```
+    ...
+    TEMPLATES = [
+        {
+            ...
+            'DIRS': [BASE_DIR / 'templates'], # Tambahkan kode ini
+            ...
+        }
+    ]
+    ...
+    ```
+* Selanjutnya, kita perlu mengganti berkas `main.html` yang terdapat pada subdirektori `tempaltes` pada direktori `main` menjadi sebagai berikut.<br><br>
+    ```
+    {% extends 'base.html' %}
+
+    {% block content %}
+        <h1>Sparkle Sphere Page</h1>
+
+        <h5>Name:</h5>
+        <p>{{name}}</p>
+
+        <h5>App:</h5>
+        <p>{{app}}</p>
+
+        <h5>Class:</h5>
+        <p>{{class}}</p>
+    {% endblock content %}
+    ```
+### Membuat Input `form` untuk menambahkan objek model pada app
+Form akan digunakan untuk menginput Items pada aplikasi Sparkle Sphere yang nantinya akan ditambahkan pada halaman utama.<br>
+* Kita perlu membuat berkas `forms.py` pada direktori main untuk menerima data produk baru sebagai berikut.<br><br>
+    ```
+    from django.forms import ModelForm
+    from main.models import Item
+
+    class ProductForm(ModelForm):
+        class Meta:
+            model = Item
+            fields = ["name", "amount", "description"]
+    ```
+    **Penjelasan Kode:**
+    * `model = Item` digunakan untuk menunjukan model yang akan digunakan untuk _form_ dan ketika disimpan, isi _form_ akan disimpan menjasi object `Item`.<br>
+    * `fields = ["name", "amount", "description"]` akaan menunjukan _field_ dari model Items yang digunakan untuk _form_.
+* Tambahkan beberapa import pada `views.py` pada folder `main` sebagai berikut.<br><br>
+    ```
+    from django.http import HttpResponseRedirect
+    from main.forms import ProductForm
+    from django.urls import reverse
+    ```
+* Kemudian kita perlu menambahkan fungsi baru dengan nama `create_product` yang akan menerima input dengan parameter `request` untuk menambahkan data produk yang kita _submit_ pada _form_. <br><br>
+    ```
+    def create_product(request):
+        form = ProductForm(request.POST or None)
+
+        if form.is_valid() and request.method == "POST":
+            form.save()
+            return HttpResponseRedirect(reverse('main:show_main'))
+
+        context = {'form': form}
+        return render(request, "create_product.html", context)
+    ```
+    **Penjelasan Kode:** Kita membuat formulir baru dengan ProductForm(request.POST or None), memvalidasi input dengan form.is_valid(), dan menyimpan data dengan form.save(). Setelah berhasil, kita menggunakan return HttpResponseRedirect(reverse('main:show_main')) untuk mengarahkan pengguna ke halaman lain.<br><br>
+* Selanjutnya, kita perlu menambahkan beberapa hal pada ```show_main``` dalma berkas ```views.py``` sebagai berikut.<br><br>
+    ```
+    def show_main(request):
+    items = Item.objects.all()
+    
+    context = {
+        'name': 'Rumintang Jessica H',
+        'app' : 'Sparkle Sphere',
+        'class': 'PBP A',
+        'items' : items
+    }
+    return render(request, "main.html", context)
+    ```
+    Fungsi `Item.objects.all()` akan digunakan untuk mengambai semua Items yang tersimpan pada database.<br><br>
+* Tambahkan _import_ fungsi `create_product` pada `views.py`
+    ```
+    from main.views import show_main, create_product
+    ```
+* Kemudian, tambahkan _path url_ ke dalam `urlpatterns` yang terdapat pada `urls.py` unruk dapat mengakses fungsi yang sebelumnya telah kita import. <br><br>
+    ```
+    ...
+    path('create-product', create_product, name='create_product'),
+    ...
+    ```
+* Setelah itu, kita perlu membuat berkas HTML baru yang bernama `create_product.html` pada direktori `template` yang terdapat di dalam `main`.<br><br>
+    ```
+    {% extends 'base.html' %} 
+
+    {% block content %}
+    <h1>Add New Product</h1>
+
+    <form method="POST">
+        {% csrf_token %}
+        <table>
+            {{ form.as_table }}
+            <tr>
+                <td></td>
+                <td>
+                    <input type="submit" value="Add Product"/>
+                </td>
+            </tr>
+        </table>
+    </form>
+
+    {% endblock %}
+    ```
+    **Penjelasan Kode:**
+    `<form method="POST">` digunakan untuk menandai formulir dengan metode POST, `{% csrf_token %}` adalah token keamanan, dan `{{ form.as_table }}` digunakan untuk menampilkan field-form sebagai tabel. Tombol "Submit" `<input type="submit" value="Add Product"/>` digunakan untuk mengirimkan data ke view `create_product(request)`. Ini adalah langkah dasar dalam membuat formulir Django yang aman dan efisien.
+
+* Kita perlu menambahkan kode berikut ke dalam `{% block content %}` yang terdapat di dalam berkas `main.html` yang akan menampilkan data produk dalam bentuk tabel.<br><br>
+    ```
+    ...
+    {% with total_items=items|length %}
+        <p>Kamu menyimpan {{ total_items }} jewelry pada Sparkle Sphere </p>
+    {% endwith %}
+
+    {% comment %} Tambahan kode untuk nilai bonus {% endcomment %}
+
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Amount</th>
+            <th>Description</th>
+            <th>Date Added</th>
+        </tr>
+
+        {% comment %} Berikut cara memperlihatkan data produk di bawah baris ini {% endcomment %}
+
+        {% for item in items %}
+            <tr>
+                <td>{{item.name}}</td>
+                <td>{{item.amount}}</td>
+                <td>{{item.description}}</td>
+                <td>{{item.date_added}}</td>
+            </tr>
+        {% endfor %}
+    </table>
+
+    <br />
+
+    <a href="{% url 'main:create_product' %}">
+        <button>
+            Add New Product
+        </button>
+    </a>
+
+    {% endblock content %}
+    ```
+* Selanjutnya, kita dapat mencoba menjalankan web dengan `python manage.py runserver` dan membuka link http://localhost:8000/ di browser. Setelah menambahkan Items pada forms, seharysnya kita dapat melihat data barang yang baru saja ditambahkan pada halaman utama aplikasi.<br><br>
+
+### Menampilkan Data Produk dalam Bentuk HTML, XML, JSON,XML by ID, dan JSON by ID.
+Penjelasan untuk menampilkan data produk dalam bentuk HTML sudah dijelaskan bersamaan dengan pembuatan form. <br><br>
+
+* Pertama-tama kita perlu menambahkan beberapa _import_ sebagai berikut.
+    ```
+    from django.http import HttpResponse
+    from django.core import serializers
+    ```
+* Kemudian kita perlu menambahkan fungsi yang menerima parameter _request_ dengan nama `show_xml`, `show_json`. Setelah itu tambahkan _return function_ dalam bentuk `HttpResponse`.
+    * XML
+        ```
+        def show_xml(request):
+            data = Product.objects.all()
+            return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
+        ```
+    * JSON
+        ```
+        def show_json(request):
+            data = Product.objects.all()
+            return HttpResponse(serializers.serialize("json", data), content_type="application/json")
+        ```
+* Untuk fungsi yang mengembalikan data produk berdasarkan id kita memerlukan parameter _request_ dan juga _id_
+    * XML
+        ```
+        def show_xml_by_id(request, id):
+            data = Product.objects.filter(pk=id)
+            return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
+        ```
+    * JSON
+        ```
+        def show_json_by_id(request, id):
+            data = Product.objects.filter(pk=id)
+            return HttpResponse(serializers.serialize("json", data), content_type="application/json")
+        ```
+### Membuat _Routing_ URL untuk Masing-masing `Views`
+* Langkah pertama dalam membuat _routing_ URL adalam dengan mengimport beberapa fungsi yang telah dibuat sebelumnya sebagai berikut.<br><br>
+    ```
+    from main.views import show_main, create_product, show_xml, show_json, show_xml_by_id, show_json_by_id 
+    ```
+* Setelah itu, kita perlu menambahkan _path url_ ke dalam `urlpatterns`. <br><br>
+    ```
+    ...
+    path('xml/', show_xml, name='show_xml'), 
+    path('json/', show_json, name='show_json'), 
+    path('xml/<int:id>/', show_xml_by_id, name='show_xml_by_id'),
+    path('json/<int:id>/', show_json_by_id, name='show_json_by_id'), 
+    ...
+    ```
+
+Kita dapat melihat hasilnya dengan menjalankan server `python manage.py runserver` dan membuka http://localhost:8000/xml, http://localhost:8000/json,  http://localhost:8000/xml/[id] atau http://localhost:8000/json/[id] pada browser.
+
+![HTML at Postman](image-2.png)
+![XML at Postman](image-3.png)
+![JSON at Postman](image-4.png)
+![XML (id:2)](image-5.png)
+![JSON (id:3)](image-6.png)
