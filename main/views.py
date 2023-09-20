@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
-from main.forms import ProductForm
+from main.forms import ItemForm
 from django.urls import reverse
 from django.http import HttpResponse
 from django.core import serializers
@@ -18,15 +18,15 @@ def show_main(request):
     }
     return render(request, "main.html", context)
 
-def create_product(request):
-    form = ProductForm(request.POST or None)
+def create_item(request):
+    form = ItemForm(request.POST or None)
 
     if form.is_valid() and request.method == "POST":
         form.save()
         return HttpResponseRedirect(reverse('main:show_main'))
 
     context = {'form': form}
-    return render(request, "create_product.html", context)
+    return render(request, "create_item.html", context)
 
 def show_xml(request):
     data = Item.objects.all()

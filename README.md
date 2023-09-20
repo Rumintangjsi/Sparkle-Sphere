@@ -285,7 +285,7 @@ Form akan digunakan untuk menginput Items pada aplikasi Sparkle Sphere yang nant
     from django.forms import ModelForm
     from main.models import Item
 
-    class ProductForm(ModelForm):
+    class ItemForm(ModelForm):
         class Meta:
             model = Item
             fields = ["name", "amount", "description"]
@@ -296,22 +296,22 @@ Form akan digunakan untuk menginput Items pada aplikasi Sparkle Sphere yang nant
 * Tambahkan beberapa import pada `views.py` pada folder `main` sebagai berikut.<br><br>
     ```
     from django.http import HttpResponseRedirect
-    from main.forms import ProductForm
+    from main.forms import ItemForm
     from django.urls import reverse
     ```
-* Kemudian kita perlu menambahkan fungsi baru dengan nama `create_product` yang akan menerima input dengan parameter `request` untuk menambahkan data produk yang kita _submit_ pada _form_. <br><br>
+* Kemudian kita perlu menambahkan fungsi baru dengan nama `create_item` yang akan menerima input dengan parameter `request` untuk menambahkan data produk yang kita _submit_ pada _form_. <br><br>
     ```
-    def create_product(request):
-        form = ProductForm(request.POST or None)
+    def create_item(request):
+        form = ItemForm(request.POST or None)
 
         if form.is_valid() and request.method == "POST":
             form.save()
             return HttpResponseRedirect(reverse('main:show_main'))
 
         context = {'form': form}
-        return render(request, "create_product.html", context)
+        return render(request, "create_item.html", context)
     ```
-    **Penjelasan Kode:** Kita membuat formulir baru dengan ProductForm(request.POST or None), memvalidasi input dengan form.is_valid(), dan menyimpan data dengan form.save(). Setelah berhasil, kita menggunakan return HttpResponseRedirect(reverse('main:show_main')) untuk mengarahkan pengguna ke halaman lain.<br><br>
+    **Penjelasan Kode:** Kita membuat formulir baru dengan ItemForm(request.POST or None), memvalidasi input dengan form.is_valid(), dan menyimpan data dengan form.save(). Setelah berhasil, kita menggunakan return HttpResponseRedirect(reverse('main:show_main')) untuk mengarahkan pengguna ke halaman lain.<br><br>
 * Selanjutnya, kita perlu menambahkan beberapa hal pada ```show_main``` dalma berkas ```views.py``` sebagai berikut.<br><br>
     ```
     def show_main(request):
@@ -326,22 +326,22 @@ Form akan digunakan untuk menginput Items pada aplikasi Sparkle Sphere yang nant
     return render(request, "main.html", context)
     ```
     Fungsi `Item.objects.all()` akan digunakan untuk mengambai semua Items yang tersimpan pada database.<br><br>
-* Tambahkan _import_ fungsi `create_product` pada `views.py`
+* Tambahkan _import_ fungsi `create_item` pada `views.py`
     ```
-    from main.views import show_main, create_product
+    from main.views import show_main, create_item
     ```
 * Kemudian, tambahkan _path url_ ke dalam `urlpatterns` yang terdapat pada `urls.py` unruk dapat mengakses fungsi yang sebelumnya telah kita import. <br><br>
     ```
     ...
-    path('create-product', create_product, name='create_product'),
+    path('create-item', create_item, name='create_item'),
     ...
     ```
-* Setelah itu, kita perlu membuat berkas HTML baru yang bernama `create_product.html` pada direktori `template` yang terdapat di dalam `main`.<br><br>
+* Setelah itu, kita perlu membuat berkas HTML baru yang bernama `create_item.html` pada direktori `template` yang terdapat di dalam `main`.<br><br>
     ```
     {% extends 'base.html' %} 
 
     {% block content %}
-    <h1>Add New Product</h1>
+    <h1>Add New Item</h1>
 
     <form method="POST">
         {% csrf_token %}
@@ -350,7 +350,7 @@ Form akan digunakan untuk menginput Items pada aplikasi Sparkle Sphere yang nant
             <tr>
                 <td></td>
                 <td>
-                    <input type="submit" value="Add Product"/>
+                    <input type="submit" value="Add Item"/>
                 </td>
             </tr>
         </table>
@@ -359,7 +359,7 @@ Form akan digunakan untuk menginput Items pada aplikasi Sparkle Sphere yang nant
     {% endblock %}
     ```
     **Penjelasan Kode:**
-    `<form method="POST">` digunakan untuk menandai formulir dengan metode POST, `{% csrf_token %}` adalah token keamanan, dan `{{ form.as_table }}` digunakan untuk menampilkan field-form sebagai tabel. Tombol "Submit" `<input type="submit" value="Add Product"/>` digunakan untuk mengirimkan data ke view `create_product(request)`. Ini adalah langkah dasar dalam membuat formulir Django yang aman dan efisien.
+    `<form method="POST">` digunakan untuk menandai formulir dengan metode POST, `{% csrf_token %}` adalah token keamanan, dan `{{ form.as_table }}` digunakan untuk menampilkan field-form sebagai tabel. Tombol "Submit" `<input type="submit" value="Add Item"/>` digunakan untuk mengirimkan data ke view `create_item(request)`. Ini adalah langkah dasar dalam membuat formulir Django yang aman dan efisien.
 
 * Kita perlu menambahkan kode berikut ke dalam `{% block content %}` yang terdapat di dalam berkas `main.html` yang akan menampilkan data produk dalam bentuk tabel.<br><br>
     ```
@@ -392,9 +392,9 @@ Form akan digunakan untuk menginput Items pada aplikasi Sparkle Sphere yang nant
 
     <br />
 
-    <a href="{% url 'main:create_product' %}">
+    <a href="{% url 'main:create_item' %}">
         <button>
-            Add New Product
+            Add New Item
         </button>
     </a>
 
@@ -414,32 +414,32 @@ Penjelasan untuk menampilkan data produk dalam bentuk HTML sudah dijelaskan bers
     * XML
         ```
         def show_xml(request):
-            data = Product.objects.all()
+            data = Item.objects.all()
             return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
         ```
     * JSON
         ```
         def show_json(request):
-            data = Product.objects.all()
+            data = Item.objects.all()
             return HttpResponse(serializers.serialize("json", data), content_type="application/json")
         ```
 * Untuk fungsi yang mengembalikan data produk berdasarkan id kita memerlukan parameter _request_ dan juga _id_
     * XML
         ```
         def show_xml_by_id(request, id):
-            data = Product.objects.filter(pk=id)
+            data = Item.objects.filter(pk=id)
             return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
         ```
     * JSON
         ```
         def show_json_by_id(request, id):
-            data = Product.objects.filter(pk=id)
+            data = Item.objects.filter(pk=id)
             return HttpResponse(serializers.serialize("json", data), content_type="application/json")
         ```
 ### Membuat _Routing_ URL untuk Masing-masing `Views`
 * Langkah pertama dalam membuat _routing_ URL adalam dengan mengimport beberapa fungsi yang telah dibuat sebelumnya sebagai berikut.<br><br>
     ```
-    from main.views import show_main, create_product, show_xml, show_json, show_xml_by_id, show_json_by_id 
+    from main.views import show_main, create_item, show_xml, show_json, show_xml_by_id, show_json_by_id 
     ```
 * Setelah itu, kita perlu menambahkan _path url_ ke dalam `urlpatterns`. <br><br>
     ```
