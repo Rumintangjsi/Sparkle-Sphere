@@ -1,54 +1,110 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>Sparkle Sphere Page</h1>
+<style>
 
-    <h5>Name:</h5>
-    <p>{{name}}</p>
+    table {
+        margin-top: 20px;
+        border-collapse: collapse; /* Added to merge cell borders */
+        width: 100%; /* Added to make the table full-width */
+    }
 
-    <h5>App:</h5>
-    <p>{{app}}</p>
+    table, th, td {
+        border: 2px solid black; /* Added to set border style */
+    }
 
-    <h5>Class:</h5>
-    <p>{{class}}</p>
-
-    {% with total_items=items|length %}
-        <p>Kamu menyimpan {{ total_items }} jewelry pada Sparkle Sphere </p>
-    {% endwith %}
-
-    <table>
-        <tr>
-            <th>Name</th>
-            <th>Amount</th>
-            <th>Description</th>
-            <th>Date Added</th>
-        </tr>
+    th, td {
+        padding: 8px; /* Added for cell padding */
+        text-align: left; /* Added for cell text alignment */
+    }
     
-        {% comment %} Berikut cara memperlihatkan data produk di bawah baris ini {% endcomment %}
-    
-        {% for item in items %}
-            <tr>
-                <td>{{item.name}}</td>
-                <td>{{item.amount}}</td>
-                <td>{{item.description}}</td>
-                <td>{{item.date_added}}</td>
+    .header-cell {
+        background-color: #c4a884;
+    }
+
+    h1, h2, h3, h4, h5, h6, p {
+        font-family: 'Calibri', sans-serif; /* Use the same font for headings and paragraphs */
+    }
+
+    h1 {
+        margin-top: 30px;
+    }
+
+    h5 {
+        margin-top: 20px;
+        font-size: medium;
+    }
+
+    button{
+        background-color: #c19e6d;
+    }
+
+</style>
+
+    {% include 'navbar.html' %}
+
+    <div class="container">
+        <h1>Sparkle Sphere Page</h1>
+
+        <h5>Name:</h5>
+        <p>{{name}}</p>
+
+        <h5>App:</h5>
+        <p>{{app}}</p>
+
+        <h5>Class:</h5>
+        <p>{{class}}</p>
+
+        {% with total_items=items|length %}
+            <p>Kamu menyimpan {{ total_items }} jewelry pada Sparkle Sphere </p>
+        {% endwith %}
+
+        <table>
+            <tr class="header-cell">
+                <th>Name</th>
+                <th>Amount</th>
+                <th>Description</th>
+                <th>Date Added</th>
+                <th>Edit</th>
+                <th>Delete</th>
+
             </tr>
-        {% endfor %}
-    </table>
-    
-    <h5>Sesi terakhir login: {{ last_login }}</h5>
-    
-    <br />
-    
-    <a href="{% url 'main:create_item' %}">
-        <button>
-            Add New Item
-        </button>
-    </a>
-
-    <a href="{% url 'main:logout' %}">
-        <button>
-            Logout
-        </button>
-    </a>
+        
+            {% comment %} Berikut cara memperlihatkan data produk di bawah baris ini {% endcomment %}
+        
+            {% for item in items %}
+                <tr>
+                    <td>{{item.name}}</td>
+                    <td>{{item.amount}}</td>
+                    <td>{{item.description}}</td>
+                    <td>{{item.date_added}}</td>
+                    <td class>
+                        <a href ="{% url 'main:edit_item' item.pk %}">
+                            <button>
+                                Edit
+                            </button>
+                        </a>
+                    </td>
+                    <td class>
+                        <a href = "{% url 'main:delete_item' item.pk %}">
+                            <button>
+                                Delete
+                            </button>
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+        
+        <h5>Sesi terakhir login: {{ last_login }}</h5>
+        
+        <br />
+        
+        <a href="{% url 'main:create_item' %}">
+            <button>
+                Add New Item
+            </button>
+        </a>
+    </div>
 {% endblock content %}
+

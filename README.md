@@ -802,3 +802,323 @@ Sebelum menghubungkan `item` dan `user` kita perlu merestriksi akses halaman mai
     ...
     ```
 Kita dapet menjalankan perintah `python manage.py runserver` maka kita dapat melihat data _last login_ akan muncul di halaman _main_.
+
+# Tugas 5
+
+## 1. Jelaskan manfaat dari setiap element _selector_ dan kapan waktu yang tepat untuk menggunakannya.
+BElement Selector digunakan untuk memilih semua elemen dengan tag yang sama di dalam dokumen HTML. Berikut merupakan penjelasan tiga jenis _selector_: **Element Selector**, **ID Selector**, dan **Class Selector**. <br><br>
+
+* **Element Selector:**
+   Element Selector digunakan untuk memilih semua elemen dengan tag yang sama di dalam dokumen HTML. Contohnya, jika kita ingin memilih semua elemen `<p>` dalam dokumen HTML yang telah kita buat, kita dapat menggunakan selector ini. Berikut merupakan manfaat dari Element Selector:
+   - Mengganti gaya atau menerapkan aturan CSS secara umum (elemen dengan tag yang sama).
+   - Kita dapat menggunakan Element Selector dalam JavaScript untuk memanipulasi elemen-elemen tersebut. Ini berguna ketika kita ingin menambahkan event listener atau mengubah isi elemen-elemen tersebut.
+   
+   Waktu yang tepat untuk menggunakan Element Selector adalah ketika kita ingin memilih semua elemen dengan tag yang sama dan menerapkan aturan CSS atau operasi JavaScript pada semua elemen tersebut.<br><br>
+   **Contoh penggunaan Element Selector:**
+
+        ```
+        p {
+            color: blue;
+        }
+        ```
+* **ID Selector:**
+    ID Selector digunakan untuk memilih elemen dengan atribut id yang cocok dengan nilai yang ditentukan. Setiap id harus unik di dalam dokumen HTML, sehingga ID Selector akan memilih satu elemen tertentu. Manfaat dari ID Selector adalah:<br>
+    - Mengganti gaya atau menerapkan aturan CSS pada suatu elemen tertentu.
+    - ID Selector dapat digunakan dalam JavaScript untuk memilih dan memanipulasi elemen tertentu.
+    
+    Waktu yang tepat untuk menggunakan ID Selector adalah ketika kita perlu memilih atau memanipulasi satu elemen tertentu di dalam dokumen HTML.<br><br>
+    **Contoh penggunaan ID Selector:**
+
+        ```
+        #header {
+            background-color: gray;
+        }
+        ```
+* **Class Selector:**
+    Class Selector digunakan untuk memilih semua elemen yang memiliki kelas tertentu (atribut class) yang sesuai dengan nilai yang ditentukan. Dalam dokumen HTML, kita dapat memberikan banyak elemen kelas yang sama. Manfaat dari Class Selector adalah:
+    - Kita dapat menggabungkan beberapa elemen yang berbeda dengan kelas yang sama dan menerapkan aturan CSS yang sama pada mereka.
+    - Class Selector dapat berguna untuk memilih dan memanipulasi semua elemen kelas tertentu. Selector ini berguna ketika kita ingein melakukan operasi yang sama pada beberapa elemen terkait.
+
+    Waktu yang tepat untuk menggunakan Class Selector adalah ketika Anda ingin memilih dan memanipulasi elemen-elemen yang memiliki kelas tertentu atau saat Anda ingin menerapkan aturan CSS yang sama pada kelompok elemen tertentu. <br><br>
+    **Contoh penggunaan Class Selector:**
+
+        ```
+        .button {
+            background-color: green;
+        }
+        ```
+## 2. Jelaskan HTML5 Tag yang kamu ketahui.
+ - `<header>`: Digunakan untuk mendefinisikan bagian atas halaman web atau kepala dokumen. Biasanya berisi elemen-elemen seperti judul situs, logo, dan menu navigasi.
+
+ - `<nav>`: Digunakan untuk mengelompokkan tautan navigasi, seperti menu utama atau menu samping.
+
+ - `<section>`: Digunakan untuk mengelompokkan konten yang terkait tematik dalam halaman. Setiap bagian dapat memiliki judul yang diidentifikasi oleh elemen `<h1>` - `<h6>`.
+
+ - `<time>`: Digunakan untuk menandai waktu atau tanggal dalam teks, dan dapat membantu mesin pencari dan layanan aksesibilitas untuk mengenali konten waktu.
+
+ - `<main>`: Digunakan untuk mendefinisikan konten utama halaman web. Biasanya, hanya ada satu elemen `<main>` dalam satu halaman.
+
+## 3. Jelaskan perbedaan antara _margin_ dan _padding_.
+**Margin** adalah ruang kosong di sekitar elemen HTML. Ini adalah jarak antara elemen dan elemen lainnya atau tepi browser. Margin dapat digunakan untuk menambahkan ruang kosong di sekitar elemen HTML atau untuk mengubah posisi elemen relatif terhadap elemen lainnya. Margin tidak memengaruhi isi elemen itu sendiri, namun hanya memengaruhi jarak di sekitarnya.
+
+**Padding** adalah ruang kosong atau space antar content pada website. Dengan padding, kita bisa memisahkan satu content dengan content lainnya pada website, sehingga layout akan tertata rapi. Ketika kita mengatur padding, elemen akan memengaruhi ruang di sekitar isi elemen, tetapi tidak akan memengaruhi elemen-elemen di luarnya
+
+## 4. Jelaskan perbedaan antara _framework_ CSS Tailwind dan Bootstrap. Kapan sebaiknya kita menggunakan Bootstrap daripada Tailwind, dan sebaliknya?
+Tailwind CSS dan Bootstrap adalah dua framework CSS populer yang digunakan dalam pengembangan web untuk memudahkan desain dan pengembangan tampilan halaman web. Mereka memiliki beberapa perbedaan utama, dan pemilihan antara keduanya tergantung pada kebutuhan proyek dan preferensi pengembang.
+| Kriteria                        | Tailwind CSS                             | Bootstrap                                 |
+|---------------------------------|-----------------------------------------|-------------------------------------------|
+| Pendekatan Desain              | Utility-first: Membangun tampilan dengan menggabungkan kelas-kelas utilitas. | Opiniated: Menyediakan komponen-komponen UI siap pakai. |
+| Ukuran Framework                | Relatif kecil, hanya memuat apa yang kita gunakan. | Lebih besar, karena banyak komponen dan gaya bawaan. |
+| Kustomisasi                     | Sangat mendalam, dapat menyesuaikan secara ekstensif. | Dapat disesuaikan tetapi memerlukan lebih banyak pekerjaan. |
+| Kecepatan Memulai               | Mungkin memerlukan lebih banyak waktu untuk memulai, karena memerlukan penulisan lebih banyak kode. | Cepat untuk memulai dengan komponen-komponen UI siap pakai. |
+| Komponen UI Siap Pakai          | Tidak menyediakan komponen UI siap pakai, kita harus membangunnya sendiri. | Menyediakan berbagai komponen UI seperti tombol, formulir, dll. |
+| Kendali atas Tampilan           | Tinggi, kita memiliki kontrol penuh atas tampilan. | Lebih terbatas karena mengikuti tampilan Bootstrap yang bawaan. |
+| Ukuran File                     | Ringan jika kita hanya menggunakan bagian-bagian yang Anda butuhkan. | Lebih besar karena banyak komponen yang disertakan. |
+
+## 5. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
+Untuk memulai menkostumisasi page project yang sudah kita buat sebelumnya, kita perlu menambahkan Bootstrap ke dalam Aplikasi.
+
+### Menambahkan Bootstrap ke Aplikasi
+* Pertama-tama kita perlu menambahkan tag `<meta name="viewport">` ke dalam file `base.html` di dalam subdirektori `templates`.
+    ```
+    <head>
+        {% block meta %}
+            <meta charset="UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+        {% endblock meta %}
+    </head>
+    ```
+* Kita juga perlu menambahkan Bootstrap CSS dan juga JS.
+    * **CSS:**
+    ```
+    <head>
+        {% block meta %}
+            ...
+        {% endblock meta %}
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    </head>
+    ```
+    * **JS:**
+    ```
+    <head>
+        ...
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha384-KyZXEAg3QhqLMpG8r+J4jsl5c9zdLKaUk5Ae5f5b1bw6AUn5f5v8FZJoMxm6f5cH1" crossorigin="anonymous"></script>
+    </head>
+    ```
+
+### Menambahkan _navbar_ pada Aplikasi
+* Pertama-tama kita perlu menambuat berkas `navbar.html` pada direktori `main/template`.
+* Selanjutnya saya menambahkan code berikut: <br><br>
+    ```
+    <nav class="navbar navbar-expand-lg navbar-dark custom-navbar">
+        <a class="navbar-brand" href="#"> Rumintang Jessica </a>
+        <div class="navbar-nav ml-auto">
+            <a class="nav-item nav-link" href="{% url 'main:logout' %}">Logout</a>
+        </div>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                </li>
+            </ul>
+        </div>
+        <img src="https://i.pinimg.com/564x/c6/a7/05/c6a70583464b8be1ba6060a892df5ed0.jpg" alt="Your Logo" class="navbar-logo">
+    </nav>
+    ```
+    Dapat dilihat dari kode diatas, saya menambahkan juga logo dari Aplikasi saya yang bernama sparkle sphere, serta menambahkan button untuk _logout_ dan _home_.<br><br>
+    Untuk dapat menambahkan pengaturan pada navbar yang telah kita buat, maka kita perlu menambahkan `styles` sebagai berikut.<br><br>
+    ```
+    {% block navbar_styles %}
+    <style>
+        .custom-navbar {
+            background-color:#aa8d74; 
+            color: #ffffff; /* White text color */
+        }
+
+        .custom-heading {
+            font-family: 'Font Name', sans-serif;
+            font-weight: bold; 
+            color: #333; 
+            margin-left: 30px;
+        }
+
+        .navbar-logo {
+            max-width: 80px;
+            height: auto; 
+            margin-right: 20px;
+        }
+
+        .navbar-brand {
+            margin-left: 20px;
+        }
+
+        body {
+        font-family: 'Roboto', sans-serif;here */
+        }
+
+        h1, h2, h3, h4, h5, h6, p {
+            font-family: 'Roboto', sans-serif;
+        }
+    </style>
+
+    {% endblock navbar_styles %}
+    ```
+    Pada kode diatas saya menambahkan beberapa _arrangement_ untuk menentukan posisi yang sesuai untuk gambar serta tulisan dalam navbar, dan juga memberikan warna untuk background dan tulisan. <br><br>
+
+### Menambahkan Fitur _Edit_ pada Aplikasi
+* Pada subdirektori `main` kita perlu menambahkan fungsi baru bernama `edit_item` dalam berkas `views.py`.
+    ```
+    def edit_product(request, id):
+        # Get product berdasarkan ID
+        item = Item.objects.get(pk = id)
+
+        # Set product sebagai instance dari form
+        form = ItemForm(request.POST or None, instance=product)
+
+        if form.is_valid() and request.method == "POST":
+            # Simpan form dan kembali ke halaman awal
+            form.save()
+            return HttpResponseRedirect(reverse('main:show_main'))
+
+        context = {'form': form}
+        return render(request, "edit_item.html", context)
+    ```
+* Selanjutnya kita akan membuat berkas HTML baru yang bernama `edit_item.html` pada subdirektori `main/templates` dan menambahkan kode berikut.
+    ```
+    {% extends 'base.html' %}
+
+    {% load static %}
+
+    {% block content %}
+
+    <h1>Edit Item</h1>
+
+    <form method="POST">
+        {% csrf_token %}
+        <table>
+            {{ form.as_table }}
+            <tr>
+                <td></td>
+                <td>
+                    <input type="submit" value="Edit Item"/>
+                </td>
+            </tr>
+        </table>
+    </form>
+
+    {% endblock %}
+    ```
+* Setelah itu kita perlu menambahkan _path_ url untuk dapat mengakses fungsi yang telah kita buat. Tentunya kita harus mengimport fungsi yang telah dibuat terlebih dahulu.<br><br>
+    ```
+    from main.views import edit_item
+    ```
+
+    ```
+    ...
+    path('edit-item/<int:id>', edit_item, name='edit_item'),
+    ...
+    ```
+* Selanjutnya kita juga akan menambahkan kode pada `main.html` agar tombol `edit` dapat muncul pada halaman main
+    ```
+    ...
+    <tr>
+        ...
+        <td>
+            <a href="{% url 'main:edit_item' item.pk %}">
+                <button>
+                    Edit
+                </button>
+            </a>
+        </td>
+    </tr>
+    ...
+    ```
+### Menambahkan Fitur _Delete_ pada Aplikasi
+* Sama halnya dengan `edit` kita juga perlu melakukan hal yang sama dengan tombol delete. Pertama, kita akan membuat fungsi `delete_item` pada berkas `views.py` yang terdapat pada subdirektori `main`.<br><br>
+    ```
+    def delete_item(request, id):
+        # Get data berdasarkan ID
+        item = Item.objects.get(pk = id)
+        # Hapus data
+        item.delete()
+        # Kembali ke halaman awal
+        return HttpResponseRedirect(reverse('main:show_main'))
+    ```
+* Selanjutnya, kita akan mengimpor fungsi yang telah kita buat.<br><br>
+    ```
+    from main.views import delete_item
+    ```
+* Setelah itu, kita akan menambahkan path url ke dalam `urlpatterns` agar fungsi dapat diakses.
+    ```
+    ...
+    path('delete/<int:id>', delete_item, name='delete_item'), # sesuaikan dengan nama fungsi yang dibuat
+    ...
+    ```
+* Kemudian, kita akan menambahkan tombol pada `main.html`
+    ```
+    ...
+    <tr>
+        ...
+        <td>
+            <a href="{% url 'main:edit_item' item.pk %}">
+                <button>
+                    Edit
+                </button>
+            </a>
+            <a href="{% url 'main:delete_item' item.pk %}">
+                <button>
+                    Delete
+                </button>
+            </a>
+        </td>
+    </tr>
+    ...
+    ```
+### Styles pada Aplikasi Main
+Pada aplikasi main, saya menambahkan beberapa kustomisasi sebagai berikut
+```
+<style>
+
+    table {
+        margin-top: 20px;
+        border-collapse: collapse; /* Added to merge cell borders */
+        width: 100%; /* Added to make the table full-width */
+    }
+
+    table, th, td {
+        border: 2px solid black; /* Added to set border style */
+    }
+
+    th, td {
+        padding: 8px; /* Added for cell padding */
+        text-align: left; /* Added for cell text alignment */
+    }
+    
+    .header-cell {
+        background-color: #c4a884;
+    }
+
+    h1, h2, h3, h4, h5, h6, p {
+        font-family: 'Calibri', sans-serif; /* Use the same font for headings and paragraphs */
+    }
+
+    h1 {
+        margin-top: 30px;
+    }
+
+    h5 {
+        margin-top: 20px;
+        font-size: medium;
+    }
+
+    button{
+        background-color: #c19e6d;
+    }
+
+</style>
+```
+Pada kode diatas, saya mengatur backgroud color menggunakan `background-color` serta mengatur padding dan juga margin untuk menyesuaikan penempatan dari tiap elemen, maupun keseluruhan elemen. Selain itu, saya juga menambahkan border untuk membuat tabel, serta mengatur ketebalan dari border yang saya gunakan. Saya juga menambahkan warna pada header dari tabel yang ada.

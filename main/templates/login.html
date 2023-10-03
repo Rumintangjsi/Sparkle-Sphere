@@ -5,8 +5,31 @@
 {% endblock meta %}
 
 {% block content %}
+<style>
+    .login {
+        text-align: left;
+        font-family: Calibri, sans-serif;
+        margin-left: 30px;
+        margin-top: 30px;
+    }
+    
+    .form-control {
+        width: 100%;
+        padding: 5px;
+        margin: 5px 0;
+    }
 
-<div class = "login">
+    .login_btn {
+        background-color: #a27a55;
+        color: #fff;
+        padding: 5px 10px;
+        border: none;
+        cursor: pointer;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+</style>
+<div class="login">
 
     <h1>Login</h1>
 
@@ -14,12 +37,12 @@
         {% csrf_token %}
         <table>
             <tr>
-                <td>Username: </td>
+                <td>Username:</td>
                 <td><input type="text" name="username" placeholder="Username" class="form-control"></td>
             </tr>
                     
             <tr>
-                <td>Password: </td>
+                <td>Password:</td>
                 <td><input type="password" name="password" placeholder="Password" class="form-control"></td>
             </tr>
 
