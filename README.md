@@ -2,7 +2,8 @@
 # Tugas 2
 ### Nama: Rumintang Jessica H <br>
 ### Kelas: PBP A <br> 
-### Nama App : [Sparkle Sphere](https://sparkle-sphere.adaptable.app/main/) 🔮💍 <br>
+### Nama App : [Sparkle Sphere]( http://rumintang-jessica-tugas.pbp.cs.ui.ac.id) 🔮💍 <br>
+### Link App : http://rumintang-jessica-tugas.pbp.cs.ui.ac.id
 
 ## 1. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial)
 Djanggo sendiri merupakan suatu framework yang cukup umum dalam pengembangan webdev dengan bahasa pemrograman Python.<br>
