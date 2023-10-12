@@ -5,6 +5,10 @@ from main.views import login_user
 from main.views import logout_user
 from main.views import edit_item
 from main.views import delete_item
+from main.views import get_item_json
+from main.views import add_item_ajax
+from main.views import increment_item_ajax
+from main.views import decrement_item_ajax
 
 app_name = 'main'
 
@@ -19,5 +23,9 @@ urlpatterns = [
     path('login/', login_user, name='login'),
     path('logout/', logout_user, name='logout'),
     path('edit-item/<int:id>', edit_item, name='edit_item'),
-    path('delete/<int:id>', delete_item, name='delete_item')
+    path('delete/<int:id>', delete_item, name='delete_item'),
+    path('get-item/', get_item_json, name='get_item_json'),
+    path('create-ajax/', add_item_ajax, name='add_item_ajax'),
+    path('increment-item-ajax/<int:id>/', increment_item_ajax, name='increment_item_ajax'),
+    path('decrement-item-ajax/<int:id>/', decrement_item_ajax, name='decrement_item_ajax'),
 ]

@@ -4,19 +4,83 @@
 
 {% block content %}
 
-<h1>Edit Product</h1>
+{% include 'navbar.html' %}
 
-<form method="POST">
-    {% csrf_token %}
-    <table>
-        {{ form.as_table }}
-        <tr>
-            <td></td>
-            <td>
-                <input type="submit" value="Done Edit"/>
-            </td>
-        </tr>
-    </table>
-</form>
+<style>
+    .edit-container {
+        max-width: 400px;
+        margin: 0 auto;
+        padding: 20px;
+        background: #efe1cf;
+        border-radius: 5px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        font-family: Georgia, serif;
+        margin-top: 40px;
+    }
+
+    .form-group {
+        text-align: left;
+        margin: 10px 0;
+    }
+
+    .form-group label {
+        display: block;
+        text-align: left;
+        margin-bottom: 5px;
+        font-family: Georgia, serif;
+    }
+
+    .form-control {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+    }
+
+    .btn {
+        background-color: #a27a55;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        cursor: pointer;
+        display: block;
+        margin: 10px auto;
+        font-family: Georgia, serif;
+    }
+
+    .btn:hover {
+        background-color: rgb(207, 161, 97);
+        color: #fff;
+    }
+
+    h1 {
+        font-family: "Lucia Bright", serif;
+        text-align: center;
+        margin-bottom: 30px;
+    }
+</style>
+
+<div class="edit-container">
+    <h1>Edit Product</h1>
+
+    <form method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="{{ form.name.id_for_label }}">Name:</label>
+            {{ form.name }}
+        </div>
+        <div class="form-group">
+            <label for="{{ form.amount.id_for_label }}">Amount:</label>
+            {{ form.amount }}
+        </div>
+        <div class="form-group">
+            <label for="{{ form.description.id_for_label }}">Description:</label>
+            {{ form.description }}
+        </div>
+        <div class="form-group">
+            <input type="submit" class="btn" value="Done Edit">
+        </div>
+    </form>
+</div>
 
 {% endblock %}

@@ -4,31 +4,93 @@
     <title>Register</title>
 {% endblock meta %}
 
-{% block content %}  
+{% block content %}
+{% include 'navbar.html' %}
 
-<div class = "login">
-    
-    <h1>Register</h1>  
+<style>
+    .register-container {
+        font-family: Georgia, serif;
+        margin-top: 50px;
+    }
 
-        <form method="POST" >  
-            {% csrf_token %}  
-            <table>  
-                {{ form.as_table }}  
-                <tr>  
-                    <td></td>
-                    <td><input type="submit" name="submit" value="Daftar"/></td>  
-                </tr>  
-            </table>  
+    .register-box {
+        max-width: 400px;
+        margin: 0 auto;
+        padding: 20px;
+        background: #efe1cf;
+        border-radius: 5px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-group {
+        text-align: left;
+        margin: 10px 0;
+    }
+
+    .form-group label {
+        text-align: left;
+        display: block;
+        margin-bottom: 5px;
+        font-family: Georgia, serif;
+    }
+
+    .form-control {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+    }
+
+    .register-btn {
+        background-color: #a27a55;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        cursor: pointer;
+        display: block;
+        margin: 10px auto;
+        font-family: Georgia, serif;
+    }
+
+    .register-btn:hover {
+        background-color: rgb(207, 161, 97);
+        color: #fff;
+    }
+
+    h1 {
+        font-family: "Lucia Bright", serif;
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+</style>
+
+<div class="register-container">
+    <div class="register-box">
+        <h1>Register</h1>
+        
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.username.label_tag }}
+                <input type="text" name="{{ form.username.name }}" class="form-control" id="{{ form.username.id_for_label }}" required>
+            {{ form.password1.label_tag }}
+                <input type="password" name="{{ form.password1.name }}" class="form-control" id="{{ form.password1.id_for_label }}" required>
+            {{ form.password2.label_tag }}
+                <input type="password" name="{{ form.password2.name }}" class="form-control" id="{{ form.password2.id_for_label }}" required>
+            <div class="form-group">
+                <input class="btn register-btn" type="submit" name="submit" value="Register">
+            </div>
         </form>
 
-    {% if messages %}  
-        <ul>   
-            {% for message in messages %}  
-                <li>{{ message }}</li>  
-                {% endfor %}  
-        </ul>   
-    {% endif %}
+        {% if messages %}
+            <ul>
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+</div>
 
-</div>  
 
 {% endblock content %}

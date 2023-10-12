@@ -3,40 +3,108 @@
 {% block content %}
 <style>
 
-    table {
-        margin-top: 20px;
-        border-collapse: collapse; /* Added to merge cell borders */
-        width: 100%; /* Added to make the table full-width */
+    .flex {
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+        font-family: Georgia, serif;
     }
 
-    table, th, td {
-        border: 2px solid black; /* Added to set border style */
+    .card-item {
+        width: calc(25% - 10px); /* 25% width with margin */
+        margin: 10px;
     }
 
-    th, td {
-        padding: 8px; /* Added for cell padding */
-        text-align: left; /* Added for cell text alignment */
-    }
-    
-    .header-cell {
-        background-color: #c4a884;
+    .card {
+        width: 100%;
+        background-color: #ddcaaf;
     }
 
-    h1, h2, h3, h4, h5, h6, p {
-        font-family: 'Calibri', sans-serif; /* Use the same font for headings and paragraphs */
+    .header {
+        background-color: #c19e6d;
+        font-family: Georgia, serif;
     }
 
     h1 {
         margin-top: 30px;
+        font-family: Georgia, serif;
     }
 
-    h5 {
+    .name{
+        font-size: 30px;
+        margin-top: 50px;
+        text-align: center;
+        font-family: Georgia, serif;
+    }
+
+    .class{
+        font-size: 25px;
+        text-align: center;
         margin-top: 20px;
-        font-size: medium;
+        font-family: Georgia, serif;
     }
 
-    button{
+    .total{
+        font-size: 20px;
+        text-align: center;
+        margin-top: 20px;
+        font-family: Georgia, serif;
+    }
+
+    .sesion{
+        margin-top: 40px;
+        margin-left: 25px;
+        font-size: 15px;
+        font-family: Georgia, serif;
+    }
+
+    .btn-primary {
         background-color: #c19e6d;
+        border: #ffffff;
+        margin-left: 25px;
+        font-family: Georgia, serif;
+    }
+
+    .btn-danger {
+        background-color: #dcba8a;
+        border: #ffffff;
+        font-family: Georgia, serif;
+    }
+
+    .logout{
+        background-color: #9a7848;
+        border: #ffffff;
+        font-family: Georgia, serif;
+    }
+
+    .btn-primary:hover{
+        background-color: #e1c194;
+    }
+    .footer{
+        padding-top: 40px;
+        margin-top: 30px;
+        background-color: #6e563e;
+        color: #fff;
+        width: 100%; 
+        position:absolute;
+        font-family: Georgia, serif;
+    }
+
+    .contact{
+        font-size: 30px;
+        margin-bottom: 20px;
+        font-family: Georgia, serif;
+    }
+
+    .delete_item, .edit_item, .increment, .decrement{
+        background-color: #ae875f;
+        color: #fff;
+        border: #ffffff;
+        font-family: Georgia, serif;
+    }
+
+    .card-title,.card-text{
+        font-family: Georgia, serif;
     }
 
 </style>
@@ -44,67 +112,164 @@
     {% include 'navbar.html' %}
 
     <div class="container">
-        <h1>Sparkle Sphere Page</h1>
+        <h2 class="name">Selamat Datang {{name}} 👋🏻</h2>
 
-        <h5>Name:</h5>
-        <p>{{name}}</p>
+        <h3 class="class">From {{class}}</h3>
 
-        <h5>App:</h5>
-        <p>{{app}}</p>
-
-        <h5>Class:</h5>
-        <p>{{class}}</p>
-
-        {% with total_items=items|length %}
-            <p>Kamu menyimpan {{ total_items }} jewelry pada Sparkle Sphere </p>
+        {% with total_items=items|length%}
+            <h5 class="total">Kamu menyimpan {{ total_items }} jewelry pada Sparkle Sphere </h5>
         {% endwith %}
 
-        <table>
-            <tr class="header-cell">
-                <th>Name</th>
-                <th>Amount</th>
-                <th>Description</th>
-                <th>Date Added</th>
-                <th>Edit</th>
-                <th>Delete</th>
-
-            </tr>
-        
-            {% comment %} Berikut cara memperlihatkan data produk di bawah baris ini {% endcomment %}
-        
-            {% for item in items %}
-                <tr>
-                    <td>{{item.name}}</td>
-                    <td>{{item.amount}}</td>
-                    <td>{{item.description}}</td>
-                    <td>{{item.date_added}}</td>
-                    <td class>
-                        <a href ="{% url 'main:edit_item' item.pk %}">
-                            <button>
-                                Edit
-                            </button>
-                        </a>
-                    </td>
-                    <td class>
-                        <a href = "{% url 'main:delete_item' item.pk %}">
-                            <button>
-                                Delete
-                            </button>
-                        </a>
-                    </td>
-                </tr>
-            {% endfor %}
-        </table>
-        
-        <h5>Sesi terakhir login: {{ last_login }}</h5>
+        <div class="flex" id="item-container"></div>
         
         <br />
         
-        <a href="{% url 'main:create_item' %}">
-            <button>
-                Add New Item
+        <button
+            type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Add Item
+        </button>
+        
+        <a href="{% url 'main:logout' %}">
+            <button class="btn btn-primary">
+                Logout
             </button>
         </a>
-    </div>
-{% endblock content %}
 
+        <h4 class="sesion">Sesi terakhir login: {{ last_login }}</h4>
+
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Add New Item</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="form" onsubmit="return false;">
+                            {% csrf_token %}
+                            <div class="mb-3">
+                                <label for="name" class="col-form-label">Name:</label>
+                                <input type="text" class="form-control" id="name" name="name"></input>
+                            </div>
+                            <div class="mb-3">
+                                <label for="amount" class="col-form-label">Amount:</label>
+                                <input type="number" class="form-control" id="amount" name="amount"></input>
+                            </div>
+                            <div class="mb-3">
+                                <label for="description" class="col-form-label">Description:</label>
+                                <textarea class="form-control" id="description" name="description"></textarea>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#exampleModal" id="button_add">Add Item</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="footer mt-5">
+        <div class="container">
+            <strong><p class="contact">Contact Us:</p></strong>
+            <p>☎️ +62 0873-712-183</p>
+            <p>🌐 www.sparklesphere.com</p>
+            <p>🔮 Instagram: @SparkleSphere</p>
+            <p>&copy; 2023 Sparkle Sphere. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        
+        async function getItems() {
+            return fetch("{% url 'main:get_item_json' %}").then((res) => res.json())
+        }
+
+        async function refreshItems() {
+            const cardContainer = document.getElementById("item-container");
+            cardContainer.innerHTML = "";
+
+            const items = await getItems();
+
+            items.forEach((item) => {
+                cardContainer.innerHTML += `
+                <div class="card-item">
+                    <div class="card mx-auto p-3" style="width: 18rem;">
+                        <div class="card-body">
+                            <h4 class="card-title">${item.fields.name}</h4>
+                            <p class="card-text">Amount: ${item.fields.amount} 
+                                <button class="btn increment btn-sm rounded-full" onclick="incrementAmount(${item.pk})">+</button> 
+                                <button class="btn decrement btn-sm rounded-full" onclick="decrementAmount(${item.pk})">-</button>
+                            </p>
+                            <p class="card-text">${item.fields.description}</p>
+                            <a style="justify-content: baseline;" href='edit-item/${item.pk}' class="btn edit_item" onclick="editItem(${item.pk})">Edit</a>
+                            <button style="justify-content: baseline;" class="btn delete_item" onclick="deleteItem(${item.pk})">Delete</button>
+                        </div>
+                    </div>
+                </div>`; 
+            });
+            document.getElementById("item-container").innerHTML = cardContainer.innerHTML;
+        }
+
+        refreshItems()
+
+        function addItem() {
+            fetch("{% url 'main:add_item_ajax' %}", {
+                method: "POST",
+                body: new FormData(document.querySelector('#form'))
+            }).then(refreshItems)
+
+            document.getElementById("form").reset()
+            return false
+        }
+        document.getElementById("button_add").onclick = addItem
+
+        function editItem(itemId) {
+            fetch(`{% url 'main:edit_item' 0 %}${itemId}/`, {
+                method: "POST",
+                body: new FormData(document.querySelector('#form'))
+            }).then(refreshItems)
+            document.getElementById("form").reset()
+            return false
+        }
+
+        function editItem(itemId) {
+        fetch(`{% url 'main:edit_item' 0 %}`.replace("0", itemId), {
+            method: "POST",
+            body: new FormData(document.querySelector('#form'))
+        }).then(refreshItems)
+
+        document.getElementById("form").reset()
+        return false
+        }
+
+        function deleteItem(itemId) {
+            fetch(`{% url 'main:delete_item' 0 %}`.replace("0", itemId), {
+                method: "POST",
+                body: new FormData(document.querySelector('#form'))
+            }).then(refreshItems)
+
+            document.getElementById("form").reset()
+            return false
+        }
+
+        function incrementAmount(id) {
+            fetch("/increment-item-ajax/" + id + "/", {
+                method: "POST"
+            }).then(refreshItems)
+
+            document.getElementById("form").reset()
+            return false
+        }
+
+        function decrementAmount(id) {
+            fetch("/decrement-item-ajax/" + id + "/", {
+                method: "POST"
+            }).then(refreshItems)
+
+            document.getElementById("form").reset()
+            return false
+        }
+        
+    </script>
+{% endblock content %}

@@ -5,64 +5,100 @@
 {% endblock meta %}
 
 {% block content %}
+{% include 'navbar.html' %}
+
 <style>
-    .login {
-        text-align: left;
-        font-family: Calibri, sans-serif;
-        margin-left: 30px;
-        margin-top: 30px;
+    .login-container {
+        text-align: center;
+        font-family: Georgia, serif;
+        margin-top: 50px;
     }
-    
+
+    .login-box {
+        max-width: 400px;
+        margin: 0 auto;
+        padding: 20px;
+        background: #efe1cf;
+        border-radius: 5px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-group {
+        text-align: left;
+        margin: 10px 0;
+    }
+
+    .form-group label {
+        display: block;
+        text-align: left;
+        margin-bottom: 5px;
+        font-family: Georgia, serif;
+    }
+
     .form-control {
+        display: block;
         width: 100%;
-        padding: 5px;
-        margin: 5px 0;
+        padding: 10px;
+        margin: 10px 0;
     }
 
     .login_btn {
         background-color: #a27a55;
         color: #fff;
-        padding: 5px 10px;
+        padding: 10px 20px;
         border: none;
         cursor: pointer;
-        margin-top: 10px;
-        margin-bottom: 10px;
+        display: block;
+        margin: 10px auto;
     }
+
+    .login_btn:hover {
+        background-color: rgb(207, 161, 97);
+        color: #ffffff;
+    }
+
+    h1{
+        font-family: "Lucia Bright", serif; 
+    }
+
+    p{
+        font-family: Georgia, serif;
+    }
+
+
 </style>
-<div class="login">
 
-    <h1>Login</h1>
+<div class="login-container">
+    <div class="login-box">
+        <h1>Login</h1>
 
-    <form method="POST" action="">
-        {% csrf_token %}
-        <table>
-            <tr>
-                <td>Username:</td>
-                <td><input type="text" name="username" placeholder="Username" class="form-control"></td>
-            </tr>
-                    
-            <tr>
-                <td>Password:</td>
-                <td><input type="password" name="password" placeholder="Password" class="form-control"></td>
-            </tr>
+        <form method="POST" action="">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" name="username" id="username" placeholder="Username" class="form-control">
+            </div>
 
-            <tr>
-                <td></td>
-                <td><input class="btn login_btn" type="submit" value="Login"></td>
-            </tr>
-        </table>
-    </form>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" name="password" id="password" placeholder="Password" class="form-control">
+            </div>
 
-    {% if messages %}
-        <ul>
-            {% for message in messages %}
-                <li>{{ message }}</li>
-            {% endfor %}
-        </ul>
-    {% endif %}     
-        
-    Don't have an account yet? <a href="{% url 'main:register' %}">Register Now</a>
+            <div class="form-group">
+                <input class="btn login_btn" type="submit" value="Login">
+            </div>
+        </form>
 
+        {% if messages %}
+            <ul>
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        <p>Don't have an account yet? <a href="{% url 'main:register' %}">Register Now</a></p>
+    </div>
 </div>
 
 {% endblock content %}

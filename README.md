@@ -1122,3 +1122,469 @@ Pada aplikasi main, saya menambahkan beberapa kustomisasi sebagai berikut
 </style>
 ```
 Pada kode diatas, saya mengatur backgroud color menggunakan `background-color` serta mengatur padding dan juga margin untuk menyesuaikan penempatan dari tiap elemen, maupun keseluruhan elemen. Selain itu, saya juga menambahkan border untuk membuat tabel, serta mengatur ketebalan dari border yang saya gunakan. Saya juga menambahkan warna pada header dari tabel yang ada.
+
+# Tugas 6
+## 1. Jelaskan perbedaan antara asynchronous programming dengan synchronous programming.
+| Fitur / Aspek                   | Synchronous Programming   | Asynchronous Programming   |
+|----------------------------------|--------------------------|------------------------|
+| Alur Eksekusi                   | Satu persatu secara berurutan      | Bersamaan tanpa menunggu satu sama lain |
+| Responsifitas                  | Tidak Responsif         | Responsif              |
+| Kasus Penggunaan                | Tugas Sederhana, I/O     | I/O, Penundaan, Paralel|
+| Penanganan Kesalahan            | Mudah                    | Kompleks                |
+| Struktur Kode                   | Linear                   | Kompleks (Callback/Promise/Async-Await) |
+
+
+## 2. Dalam penerapan JavaScript dan AJAX, terdapat penerapan paradigma event-driven programming. Jelaskan maksud dari paradigma tersebut dan sebutkan salah satu contoh penerapannya pada tugas ini.
+Paradigma "event-driven programming" adalah pendekatan pemrograman di mana alur eksekusi program ditentukan oleh peristiwa (event) yang terjadi, bukan oleh aliran eksekusi berurutan. Ini berarti program menunggu peristiwa tertentu terjadi, dan ketika peristiwa tersebut terjadi, program akan merespons secara sesuai.
+
+Contoh penerapannya pada tugas ini adalah dengan penggunaan AJAX (Asynchronous JavaScript and XML) untuk mengambil atau mengirim data ke server secara asinkron. Dalam kasus ini, "event" adalah peristiwa yang terkait dengan permintaan HTTP, seperti permintaan data dari server atau pengiriman data ke server. Anda menentukan peristiwa-peristiwa ini, seperti mengklik tombol "Tambah Item" atau "Edit Item," dan kemudian menentukan bagaimana program harus merespons ketika peristiwa-peristiwa tersebut terjadi.
+
+Contoh konkretnya adalah ketika user mengklik tombol "Tambah Item" pada halaman web Sparkle Sphere. Dengan paradigma event-driven, Saya akan mendefinisikan apa yang harus terjadi ketika tombol ini diklik. Saya menerapkan kode JavaScript yang akan memicu permintaan AJAX untuk menambahkan item baru ke server dan memperbarui tampilan tanpa harus me-refresh seluruh halaman. Inilah salah satu contoh  penggunaan paradigma event-driven dalam pemrograman JavaScript dan AJAX, di mana program yang saya buat merespons peristiwa (klik tombol) dengan mengirim permintaan ke server dan mengupdate tampilan ketika respon dari server diterima.
+
+
+## 3. Jelaskan penerapan asynchronous programming pada AJAX.
+Berikut merupakan beberapa penerapan asynchronous programming pada AJAX:
+1. Asynchronous Request
+Saat kita membuat permintaan AJAX, seperti mengambil data dari server atau mengirim data ke server, permintaan ini dikirim secara asinkron. Artinya, permintaan ini tidak menghentikan eksekusi kode JavaScript lainnya. Ini sangat penting dalam lingkungan web, di mana responsifitas dan kinerja aplikasi adalah prioritas.
+
+2. Callback Functions
+Untuk mengelola permintaan AJAX secara asinkron, kita menggunakan callback functions. Ini adalah fungsi-fungsi JavaScript yang akan dipanggil ketika permintaan selesai. Ada dua callback utama yang digunakan dalam AJAX:
+* `onreadystatechange`: Ini adalah callback yang dipanggil setiap kali ada perubahan dalam status permintaan AJAX. Dengan ini, kita dapat memantau status permintaan dan mengambil tindakan sesuai ketika permintaan berubah.
+* `onload`: Ini adalah callback yang dipanggil ketika permintaan selesai dengan sukses. kita akan menangani respons dari server di sini dan memperbarui tampilan atau melakukan tindakan lain yang diperlukan.
+
+3. Promises dan async/await
+Selain callback functions, kita juga dapat menggunakan fitur `async` dan `await` dalam JavaScript. Fitur ini memungkinkan kita untuk menulis kode yang lebih bersih dan mudah dipahami saat mengelola permintaan AJAX yang asinkron.
+
+4. Error Handling
+Kita dapat mengelola kesalahan yang mungkin terjadi dalam permintaan AJAX secara asinkron. Dengan menambahkan callback `onerror`, kita dapat menangani error ketika _request_ gagal.
+
+
+## 4. Pada PBP kali ini, penerapan AJAX dilakukan dengan menggunakan Fetch API daripada library jQuery. Bandingkanlah kedua teknologi tersebut dan tuliskan pendapat kamu teknologi manakah yang lebih baik untuk digunakan.
+Berikut perbandingan antara Fetch API dan jQuery untuk permintaan AJAX:
+
+| Kriteria                   | Fetch API                                   | jQuery                                    |
+|----------------------------|--------------------------------------------|-------------------------------------------|
+| Kompatibilitas Browser     | Mendukung browser modern dan standar ES6.  | Dirancang untuk kompatibilitas lintas browser termasuk yang lebih lama.         |
+| Ketergantungan Eksternal   | Zero-dependency (tidak memerlukan library eksternal). | Memerlukan library eksternal (jQuery library). |
+| Kode JavaScript            | Menggunakan Promises untuk mengelola permintaan asinkron. | Menggunakan callback functions untuk menangani respons.    |
+| Fleksibilitas              | Memberikan kontrol penuh atas permintaan HTTP dengan dukungan untuk method, header, body, dan opsi lainnya. | Lebih terbatas dalam hal konfigurasi permintaan. |
+| Kompleksitas Kode          | Lebih sedikit boilerplate code, membuat kode bersih dan lebih mudah dipahami. | Memiliki lebih banyak boilerplate code, yang dapat menghasilkan callback hell dalam proyek yang lebih besar. |
+| Populeritas                | Populer di pengembangan web modern.       | Populer dalam proyek yang lebih tua atau yang memerlukan kompatibilitas lintas browser yang ketat. |
+
+## 6. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
+* Membuat function yang bernama `get_product_json` untuk mereturn data sebagai JSON:
+    ```
+    def get_product_json(request):
+    product_item = Item.objects.filter(user=request.user)
+    return HttpResponse(serializers.serialize('json', product_item))
+    ```
+    kemudian lakukan _routing_ pada `urls.py`
+
+* Membuat function yang bernama `add_item_ajax` untuk melakukan Add Items menggunakan AJAX:
+    ```
+    @csrf_exempt
+    def add_item_ajax(request):
+        if request.method == 'POST':
+            name = request.POST.get("name")
+            amount= request.POST.get("amount")
+            description = request.POST.get("description")
+            categories = request.POST.get("categories")
+            user = request.user     
+            new_item = Item(name=name, amount=amount, description=description, user=user, categories=categories)
+            new_item.save()
+
+            return HttpResponse(b"CREATED", status=201)
+
+        return HttpResponseNotFound()
+    ```
+    kemudian lakukan _routing_ pada `urls.py` <br><br>
+    ```
+    path('create-ajax/', add_item_ajax, name='add_item_ajax'),
+    ```
+
+* Menunjukan items yang ada menggunakan `fetch()` API, kita perlu memasukan kode dibawah ini didalam `<script>`:
+    ```
+    <script>
+        async function getProducts() {
+            return fetch("{% url 'main:get_product_json' %}").then((res) => res.json())
+        }
+    </script>
+    ```
+
+    Kemudian masih didalm blok `<script>` kita akan menambahkan `refreshItems()` yang diggunakan untuk _merefresh_ items yang ada secara _asynchronous_.<br><br>
+    ```
+    ...
+        async function refreshItems() {
+            const cardContainer = document.getElementById("item-container");
+            cardContainer.innerHTML = "";
+
+            const items = await getItems();
+
+            items.forEach((item) => {
+                cardContainer.innerHTML += `
+                <div class="card-item">
+                    <div class="card mx-auto p-3" style="width: 18rem;">
+                        <div class="card-body">
+                            <h4 class="card-title">${item.fields.name}</h4>
+                            <p class="card-text">Amount: ${item.fields.amount} 
+                                <button class="btn increment btn-sm rounded-full" onclick="incrementAmount(${item.pk})">+</button> 
+                                <button class="btn decrement btn-sm rounded-full" onclick="decrementAmount(${item.pk})">-</button>
+                            </p>
+                            <p class="card-text">${item.fields.description}</p>
+                            <a style="justify-content: baseline;" href='edit-item/${item.pk}' class="btn edit_item" onclick="editItem(${item.pk})">Edit</a>
+                            <button style="justify-content: baseline;" class="btn delete_item" onclick="deleteItem(${item.pk})">Delete</button>
+                        </div>
+                    </div>
+                </div>`; 
+            });
+            document.getElementById("item-container").innerHTML = cardContainer.innerHTML;
+        }
+        refreshItems()
+    </script>
+    ```
+
+* Setelah itu saya mengimplementasikan card dan bootstrap pada aplikasi yang saya buat berserta tambahan beberapa button.
+    ```
+     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Add New Item</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="form" onsubmit="return false;">
+                            {% csrf_token %}
+                            <div class="mb-3">
+                                <label for="name" class="col-form-label">Name:</label>
+                                <input type="text" class="form-control" id="name" name="name"></input>
+                            </div>
+                            <div class="mb-3">
+                                <label for="amount" class="col-form-label">Amount:</label>
+                                <input type="number" class="form-control" id="amount" name="amount"></input>
+                            </div>
+                            <div class="mb-3">
+                                <label for="description" class="col-form-label">Description:</label>
+                                <textarea class="form-control" id="description" name="description"></textarea>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#exampleModal" id="button_add">Add Item</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    ```
+
+* Tambahkan fungsi onclick pada button "Add Item" pada modal untuk menjalankan fungsi addItem():
+
+    ```
+    <script>
+        ...
+        document.getElementById("button_add").onclick = addItem
+    </script>
+    ```
+* Berikut merupakan beberapa update pada `login.html`, `edit_item.html` dan `register.html`
+    * `login.html`:
+        ```
+        {% extends 'base.html' %}
+
+        {% block meta %}
+            <title>Login</title>
+        {% endblock meta %}
+
+        {% block content %}
+        {% include 'navbar.html' %}
+
+        <style>
+            .login-container {
+                text-align: center;
+                font-family: Georgia, serif;
+                margin-top: 50px;
+            }
+
+            .login-box {
+                max-width: 400px;
+                margin: 0 auto;
+                padding: 20px;
+                background: #efe1cf;
+                border-radius: 5px;
+                box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            }
+
+            .form-group {
+                text-align: left;
+                margin: 10px 0;
+            }
+
+            .form-group label {
+                display: block;
+                text-align: left;
+                margin-bottom: 5px;
+                font-family: Georgia, serif;
+            }
+
+            .form-control {
+                display: block;
+                width: 100%;
+                padding: 10px;
+                margin: 10px 0;
+            }
+
+            .login_btn {
+                background-color: #a27a55;
+                color: #fff;
+                padding: 10px 20px;
+                border: none;
+                cursor: pointer;
+                display: block;
+                margin: 10px auto;
+            }
+
+            .login_btn:hover {
+                background-color: rgb(207, 161, 97);
+                color: #ffffff;
+            }
+
+            h1{
+                font-family: "Lucia Bright", serif; 
+            }
+
+            p{
+                font-family: Georgia, serif;
+            }
+
+
+        </style>
+
+        <div class="login-container">
+            <div class="login-box">
+                <h1>Login</h1>
+
+                <form method="POST" action="">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="username">Username:</label>
+                        <input type="text" name="username" id="username" placeholder="Username" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Password:</label>
+                        <input type="password" name="password" id="password" placeholder="Password" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <input class="btn login_btn" type="submit" value="Login">
+                    </div>
+                </form>
+
+                {% if messages %}
+                    <ul>
+                        {% for message in messages %}
+                            <li>{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+
+                <p>Don't have an account yet? <a href="{% url 'main:register' %}">Register Now</a></p>
+            </div>
+        </div>
+
+        {% endblock content %}
+
+        ```
+
+        * `edit_item.html`:
+        ```
+        {% extends 'base.html' %}
+
+        {% load static %}
+
+        {% block content %}
+
+        {% include 'navbar.html' %}
+
+        <style>
+            .edit-container {
+                max-width: 400px;
+                margin: 0 auto;
+                padding: 20px;
+                background: #efe1cf;
+                border-radius: 5px;
+                box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+                font-family: Georgia, serif;
+                margin-top: 40px;
+            }
+
+            .form-group {
+                text-align: left;
+                margin: 10px 0;
+            }
+
+            .form-group label {
+                display: block;
+                text-align: left;
+                margin-bottom: 5px;
+                font-family: Georgia, serif;
+            }
+
+            .form-control {
+                display: block;
+                width: 100%;
+                padding: 10px;
+                margin: 10px 0;
+            }
+
+            .btn {
+                background-color: #a27a55;
+                color: #fff;
+                padding: 10px 20px;
+                border: none;
+                cursor: pointer;
+                display: block;
+                margin: 10px auto;
+                font-family: Georgia, serif;
+            }
+
+            .btn:hover {
+                background-color: rgb(207, 161, 97);
+                color: #fff;
+            }
+
+            h1 {
+                font-family: "Lucia Bright", serif;
+                text-align: center;
+                margin-bottom: 30px;
+            }
+        </style>
+
+        <div class="edit-container">
+            <h1>Edit Product</h1>
+
+            <form method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="{{ form.name.id_for_label }}">Name:</label>
+                    {{ form.name }}
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.amount.id_for_label }}">Amount:</label>
+                    {{ form.amount }}
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.description.id_for_label }}">Description:</label>
+                    {{ form.description }}
+                </div>
+                <div class="form-group">
+                    <input type="submit" class="btn" value="Done Edit">
+                </div>
+            </form>
+        </div>
+
+        {% endblock %}
+
+        ```
+
+        * `register.html`:
+        ```
+        {% extends 'base.html' %}
+
+        {% block meta %}
+            <title>Register</title>
+        {% endblock meta %}
+
+        {% block content %}
+        {% include 'navbar.html' %}
+
+        <style>
+            .register-container {
+                font-family: Georgia, serif;
+                margin-top: 50px;
+            }
+
+            .register-box {
+                max-width: 400px;
+                margin: 0 auto;
+                padding: 20px;
+                background: #efe1cf;
+                border-radius: 5px;
+                box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            }
+
+            .form-group {
+                text-align: left;
+                margin: 10px 0;
+            }
+
+            .form-group label {
+                text-align: left;
+                display: block;
+                margin-bottom: 5px;
+                font-family: Georgia, serif;
+            }
+
+            .form-control {
+                display: block;
+                width: 100%;
+                padding: 10px;
+                margin: 10px 0;
+            }
+
+            .register-btn {
+                background-color: #a27a55;
+                color: #fff;
+                padding: 10px 20px;
+                border: none;
+                cursor: pointer;
+                display: block;
+                margin: 10px auto;
+                font-family: Georgia, serif;
+            }
+
+            .register-btn:hover {
+                background-color: rgb(207, 161, 97);
+                color: #fff;
+            }
+
+            h1 {
+                font-family: "Lucia Bright", serif;
+                text-align: center;
+                margin-bottom: 30px;
+            }
+
+        </style>
+
+        <div class="register-container">
+            <div class="register-box">
+                <h1>Register</h1>
+                
+                <form method="POST">
+                    {% csrf_token %}
+                    {{ form.username.label_tag }}
+                        <input type="text" name="{{ form.username.name }}" class="form-control" id="{{ form.username.id_for_label }}" required>
+                    {{ form.password1.label_tag }}
+                        <input type="password" name="{{ form.password1.name }}" class="form-control" id="{{ form.password1.id_for_label }}" required>
+                    {{ form.password2.label_tag }}
+                        <input type="password" name="{{ form.password2.name }}" class="form-control" id="{{ form.password2.id_for_label }}" required>
+                    <div class="form-group">
+                        <input class="btn register-btn" type="submit" name="submit" value="Register">
+                    </div>
+                </form>
+
+                {% if messages %}
+                    <ul>
+                        {% for message in messages %}
+                            <li>{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </div>
+        </div>
+
+        {% endblock content %}
+        ```
+
+
+
