@@ -9,6 +9,7 @@ from main.views import get_item_json
 from main.views import add_item_ajax
 from main.views import increment_item_ajax
 from main.views import decrement_item_ajax
+from main.views import create_item_flutter
 
 app_name = 'main'
 
@@ -28,4 +29,5 @@ urlpatterns = [
     path('create-ajax/', add_item_ajax, name='add_item_ajax'),
     path('increment-item-ajax/<int:id>/', increment_item_ajax, name='increment_item_ajax'),
     path('decrement-item-ajax/<int:id>/', decrement_item_ajax, name='decrement_item_ajax'),
+    path('create-flutter/', create_item_flutter, name='create_product_flutter'),
 ]
